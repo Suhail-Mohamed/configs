@@ -2,7 +2,7 @@
 
 Personal configs for Kitty, Neovim, and i3, kept directly in `~/.config`.
 
-- `kitty/`: Catppuccin Mocha with rose accents and cool mint greens. Ctrl+Enter sends a newline for Codex.
+- `kitty/`: Catppuccin Mocha with rose accents and cool mint greens
 - `nvim/`: Kickstart-based Neovim setup with Mocha, mint parameters, light rose strings, and rose number highlights.
 - `i3/`: Window-manager configuration, keyboard shortcuts, and Mocha colors.
 
@@ -12,4 +12,5 @@ Kitty and i3 use the Ubuntu Mono Ligaturized font. The i3 config also references
 
 Reload Kitty with Ctrl+Shift+F5, restart Neovim, and reload i3 with Mod+Shift+C after changing their configs.
 
-Only these three application folders are tracked. Firefox, shell configs, and local backup files are excluded.
+
+NOTE: Configs were made with help of AI, feels like a good use case for AI tooling.
