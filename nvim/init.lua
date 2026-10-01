@@ -706,7 +706,7 @@ require('lazy').setup({
       local servers = {
         clangd = {},
         rust_analyzer = {
-          cmd = { '/home/SuMo/.local/share/nvim/mason/bin/rust-analyzer' },
+          cmd = { vim.fn.stdpath 'data' .. '/mason/bin/rust-analyzer' },
           settings = {
             ['rust-analyzer'] = {
               check = {

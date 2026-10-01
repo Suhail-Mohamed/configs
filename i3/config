@@ -23,7 +23,7 @@ exec --no-startup-id sh -c 'command -v lxpolkit >/dev/null && exec lxpolkit'
 exec --no-startup-id xdg-user-dirs-update
 
 # Applications and session control.
-bindsym $mod+Return exec --no-startup-id ~/.local/bin/dotfiles-terminal
+bindsym $mod+Return exec --no-startup-id sh -c 'exec sh "${XDG_CONFIG_HOME:-$HOME/.config}/i3/terminal.sh"'
 bindsym $mod+d exec --no-startup-id $menu
 bindsym $mod+Shift+q kill
 bindsym $mod+Shift+f exec --no-startup-id flameshot gui
