@@ -1,0 +1,152 @@
+# i3 configuration
+# Direction keys intentionally match tmux: j=left, k=down, l=up, ;=right.
+
+set $mod Mod4
+set $menu i3-dmenu-desktop --dmenu="dmenu -fn 'ubuntu mono ligaturized-10' -nb '#1e1e2e' -nf '#cdd6f4' -sb '#89b4fa' -sf '#1e1e2e'"
+set $wallpaper ~/Pictures/wallpaper.png
+
+font pango:ubuntu mono ligaturized 9
+floating_modifier $mod
+default_border pixel 1
+default_floating_border pixel 1
+hide_edge_borders smart
+gaps inner 8
+
+# Session startup. Optional programs are guarded so this config travels well.
+exec --no-startup-id sh -c 'command -v dex-autostart >/dev/null && dex-autostart --autostart --environment i3'
+exec --no-startup-id sh -c 'command -v xss-lock >/dev/null && command -v i3lock >/dev/null && exec xss-lock --transfer-sleep-lock -- i3lock --nofork'
+exec --no-startup-id sh -c 'command -v nm-applet >/dev/null && exec nm-applet'
+exec --no-startup-id sh -c 'command -v redshift >/dev/null && exec redshift -O 4000'
+exec --no-startup-id sh -c '[ -f "$HOME/Pictures/wallpaper.png" ] && command -v feh >/dev/null && exec feh --bg-fill "$HOME/Pictures/wallpaper.png"'
+exec --no-startup-id sh -c 'command -v i3-battery-popup >/dev/null && exec i3-battery-popup'
+exec --no-startup-id sh -c 'command -v lxpolkit >/dev/null && exec lxpolkit'
+exec --no-startup-id xdg-user-dirs-update
+
+# Applications and session control.
+bindsym $mod+Return exec --no-startup-id ~/.local/bin/dotfiles-terminal
+bindsym $mod+d exec --no-startup-id $menu
+bindsym $mod+Shift+q kill
+bindsym $mod+Shift+f exec --no-startup-id flameshot gui
+bindsym $mod+Shift+s exec --no-startup-id sh -c '[ -f "$HOME/Pictures/wallpaper.png" ] && exec i3lock -i "$HOME/Pictures/wallpaper.png" || exec i3lock -c 1e1e2e'
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit i3 and end this session?' -B 'Yes, exit i3' 'i3-msg exit'"
+
+# Focus: j=left, k=down, l=up, ;=right.
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+# Move containers with the same directions plus Shift.
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Layout. v creates a side-by-side split; h creates a top/bottom split.
+bindsym $mod+v split h
+bindsym $mod+h split v
+bindsym $mod+f fullscreen toggle
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+
+# Workspaces.
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+# Resize mode follows the same direction keys.
+mode "resize" {
+    bindsym j resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize shrink height 10 px or 10 ppt
+    bindsym semicolon resize grow width 10 px or 10 ppt
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+bindsym $mod+r mode "resize"
+
+# Media keys.
+set $refresh_i3status killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set +5%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
+
+# App-specific behavior.
+for_window [class="RustCPURender"] floating enable, move position center
+for_window [title="Battery Warning"] sticky enable
+
+# Catppuccin Mocha.
+client.focused          #89b4fa #1e1e2e #cdd6f4 #89b4fa #74c7ec
+client.focused_inactive #45475a #313244 #a6adc8 #45475a #313244
+client.unfocused        #313244 #1e1e2e #a6adc8 #313244 #1e1e2e
+client.urgent           #f38ba8 #1e1e2e #f2cdcd #f38ba8 #f38ba8
+client.placeholder      #313244 #181825 #a6adc8 #313244 #181825
+client.background       #1e1e2e
+
+bar {
+    strip_workspace_numbers yes
+    font pango:ubuntu mono ligaturized 9
+    status_command i3status
+
+    colors {
+        background #1e1e2e
+        statusline #cdd6f4
+        separator  #45475a
+        focused_workspace  #89b4fa #313244 #cdd6f4
+        active_workspace   #45475a #1e1e2e #cdd6f4
+        inactive_workspace #313244 #1e1e2e #a6adc8
+        urgent_workspace   #f38ba8 #1e1e2e #f2cdcd
+        binding_mode       #f38ba8 #313244 #f38ba8
+    }
+}

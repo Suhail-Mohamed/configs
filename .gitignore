@@ -1,0 +1,14 @@
+# Track only the selected application configs and repository documentation.
+/*
+!/.gitignore
+!/README.md
+!/kitty/
+!/nvim/
+!/i3/
+
+# Keep local snapshots and generated files out of version control.
+**/*.backup*
+**/*~
+**/*.swp
+**/*.swo
+/nvim/doc/tags
