@@ -1,0 +1,1 @@
+/home/SuMo/.fzf/shell/key-bindings.fish
