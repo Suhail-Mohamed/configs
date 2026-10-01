@@ -1,5 +1,5 @@
 if status is-interactive
-    # Commands to run in interactive sessions can go here
+    set -g fish_color_autosuggestion A2356F
 end
 
 function fish_prompt
@@ -20,5 +20,4 @@ function fish_prompt
 
     # Reset color to default
     set_color normal
-    set -g fish_color_autosuggestion A2356F
 end
