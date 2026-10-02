@@ -127,7 +127,7 @@ for_window [class="RustCPURender"] floating enable, move position center
 for_window [title="Battery Warning"] sticky enable
 
 # Catppuccin Mocha.
-client.focused          #89b4fa #1e1e2e #cdd6f4 #89b4fa #74c7ec
+client.focused          #cf8faa #4b3548 #e2afc2 #cf8faa #cf8faa
 client.focused_inactive #45475a #313244 #a6adc8 #45475a #313244
 client.unfocused        #313244 #1e1e2e #a6adc8 #313244 #1e1e2e
 client.urgent           #f38ba8 #1e1e2e #f2cdcd #f38ba8 #f38ba8
@@ -143,7 +143,7 @@ bar {
         background #1e1e2e
         statusline #cdd6f4
         separator  #45475a
-        focused_workspace  #89b4fa #313244 #cdd6f4
+        focused_workspace  #cf8faa #4b3548 #e2afc2
         active_workspace   #45475a #1e1e2e #cdd6f4
         inactive_workspace #313244 #1e1e2e #a6adc8
         urgent_workspace   #f38ba8 #1e1e2e #f2cdcd
