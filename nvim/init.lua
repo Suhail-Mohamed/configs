@@ -926,7 +926,7 @@ require('lazy').setup({
             ['@number'] = { fg = rose },
             ['@number.float'] = { fg = rose },
             Float = { fg = rose },
-            LineNr = { fg = '#946477' },
+            LineNr = { fg = '#825869' },
             CursorLineNr = { fg = rose, bold = true },
             TabLineSel = { fg = colors.base, bg = rose, bold = true },
           }
